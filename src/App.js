@@ -4,6 +4,7 @@ import { FaTrash, FaDownload, FaGithub } from 'react-icons/fa';
 import './App.css';
 import Stave from './components/Stave';
 import NoteTypeSelector from './components/NoteTypeSelector';
+import NoteLegend from './components/NoteLegend'; // Import NoteLegend
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -13,11 +14,11 @@ function App() {
   const staveRef = useRef(null);
 
   const noteTypes = {
-    whole: { name: "1'lik", color: "#000000", duration: 1, symbol: "𝅝" },
-    half: { name: "2'lik", color: "#1a75ff", duration: 2, symbol: "𝅗𝅥" },
-    quarter: { name: "4'lük", color: "#ff471a", duration: 4, symbol: "𝅘𝅥𝅮" },
-    eighth: { name: "8'lik", color: "#33cc33", duration: 8, symbol: "𝅘𝅥𝅯" },
-    sixteenth: { name: "16'lık", color: "#9933ff", duration: 16, symbol: "𝅘𝅥𝅰" }
+    whole: { name: "1", color: "#000000", duration: 1 },
+    half: { name: "2", color: "#1a75ff", duration: 2 },
+    quarter: { name: "4", color: "#ff471a", duration: 4},
+    eighth: { name: "8", color: "#33cc33", duration: 8},
+    sixteenth: { name: "16", color: "#9933ff", duration: 16 }
   };
 
   const handleStaveClick = (event) => {
@@ -107,7 +108,7 @@ function App() {
         <button className="icon-button" onClick={exportImage} title="Export as Image">
           <FaDownload />
         </button>
-        <button className="icon-button" onClick={() => window.open('https://github.com/your-github-username', '_blank')} title="GitHub Repository">
+        <button className="icon-button" onClick={() => window.open('https://github.com/ahmeturganci/basic-music-notes-app', '_blank')} title="GitHub Repository">
           <FaGithub />
         </button>
       </div>
@@ -125,6 +126,7 @@ function App() {
             setSelectedNoteType={setSelectedNoteType} 
           />
         )}
+        <NoteLegend noteTypes={noteTypes} /> {/* Add NoteLegend component */}
       </div>
     </div>
   );
