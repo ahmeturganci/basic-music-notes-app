@@ -10,7 +10,7 @@ const NoteTypeSelector = ({ position, noteTypes, setSelectedNoteType }) => (
       <button
         key={type}
         onClick={() => setSelectedNoteType(type)}
-        style={{ backgroundColor: details.color }}
+        style={{ textAlign: 'left' }}
       >
         <span className="note-symbol">{details.symbol}</span>
         {details.name}
