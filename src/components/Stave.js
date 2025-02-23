@@ -34,6 +34,7 @@ const LedgerLines = ({ noteY, cx }) => {
     </g>
   );
 };
+
 const Stave = ({ staveRef, notes, handleStaveClick, noteTypes }) => (
   <div className="stave-container">
     <svg
@@ -95,11 +96,11 @@ const Stave = ({ staveRef, notes, handleStaveClick, noteTypes }) => (
           />
         ))}
       </g>
-      <text 
+      <text
         opacity={0.5}
-        x="0" 
-        y="120" 
-        fontSize="220" 
+        x="0"
+        y="120"
+        fontSize="220"
         className="clef"
         dominantBaseline="middle"
         style={{
@@ -107,31 +108,31 @@ const Stave = ({ staveRef, notes, handleStaveClick, noteTypes }) => (
           fontWeight: 'normal'
         }}
       >𝄞</text>
-     {notes.map((note) => (
-  <g key={note.id}>
-    <LedgerLines noteY={note.style.cy} cx={note.style.cx} />
-    <ellipse
-      cx={note.style.cx}
-      cy={note.style.cy}
-      rx="12"
-      ry="8"
-      fill={note.type == 'whole' || note.type === 'half' ? 'white' : noteTypes[note.type].color}
-      stroke={noteTypes[note.type].color}
-      strokeWidth="2"
-      transform={`rotate(-30, ${note.style.cx}, ${note.style.cy})`}
-    />
-    {note.type !== 'whole' && (
-      <line
-        x1={note.style.cx + (note.style.cy > 120 ? -11 : 11)} // Left side if below middle line
-        y1={note.style.cy}
-        x2={note.style.cx + (note.style.cy > 120 ? -11 : 11)} // Keep same x position
-        y2={note.style.cy + (note.style.cy > 120 ? 60 : -60)} // Increased stem length to 60
-        stroke={noteTypes[note.type].color}
-        strokeWidth="1.5"
-      />
-    )}
-  </g>
-))}
+      {notes.map((note) => (
+        <g key={note.id}>
+          <LedgerLines noteY={note.style.cy} cx={note.style.cx} />
+          <ellipse
+            cx={note.style.cx}
+            cy={note.style.cy}
+            rx="12"
+            ry="8"
+            fill={note.type == 'whole' || note.type === 'half' ? 'white' : noteTypes[note.type].color}
+            stroke={noteTypes[note.type].color}
+            strokeWidth="2"
+            transform={`rotate(-30, ${note.style.cx}, ${note.style.cy})`}
+          />
+          {note.type !== 'whole' && (
+            <line
+              x1={note.style.cx + (note.style.cy <= 120 ? -11 : 11)} // Reverse condition
+              y1={note.style.cy}
+              x2={note.style.cx + (note.style.cy <= 120 ? -11 : 11)}
+              y2={note.style.cy + (note.style.cy <= 120 ? 60 : -60)} // Reverse direction
+              stroke={noteTypes[note.type].color}
+              strokeWidth="1.5"
+            />
+          )}
+        </g>
+      ))}
     </svg>
   </div>
 );
